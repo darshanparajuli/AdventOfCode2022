@@ -5,7 +5,6 @@ pub fn run() !void {
     try util.print_stdout("Day 1\n", .{});
     try part_1();
     try part_2();
-    try util.print_stdout("\n", .{});
 }
 
 fn part_1() !void {}
