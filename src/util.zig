@@ -12,7 +12,7 @@ pub fn print_stdout(comptime fmt: []const u8, args: anytype) !void {
     try stdout.print(fmt, args);
 }
 
-pub fn read_input(allocator: Allocator, day: u32) !ArrayList([]u8) {
+pub fn read_input_of_day(allocator: Allocator, day: u32) !ArrayList([]u8) {
     const fileName = try std.fmt.allocPrint(allocator, "input/day{}.txt", .{day});
     var file = try std.fs.cwd().openFile(fileName, .{});
     defer file.close();

@@ -5,7 +5,7 @@ const ArrayList = std.ArrayList;
 
 pub fn run(allocator: Allocator) !void {
     try util.print_stdout("Day 1:\n", .{});
-    const input = try util.read_input(allocator, 1);
+    const input = try util.read_input_of_day(allocator, 1);
     try part_1(try input.clone());
     try part_2(allocator, input);
 }
