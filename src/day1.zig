@@ -29,10 +29,6 @@ fn part_1(input: ArrayList([]u8)) !void {
     try util.print_stdout("  part 1: {}\n", .{max});
 }
 
-fn cmpSums(context: void, a: u32, b: u32) bool {
-    return std.sort.desc(u32)(context, a, b);
-}
-
 fn part_2(allocator: Allocator, input: ArrayList([]u8)) !void {
     var max = ArrayList(u32).init(allocator);
     var i: u32 = 0;
@@ -53,4 +49,8 @@ fn part_2(allocator: Allocator, input: ArrayList([]u8)) !void {
         finalSum += value;
     }
     try util.print_stdout("  part 2: {}\n", .{finalSum});
+}
+
+fn cmpSums(context: void, a: u32, b: u32) bool {
+    return std.sort.desc(u32)(context, a, b);
 }
