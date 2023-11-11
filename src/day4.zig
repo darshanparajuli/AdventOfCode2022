@@ -10,38 +10,38 @@ pub fn run(allocator: Allocator) !void {
     try part_2(input);
 }
 
-fn part_1(input: ArrayList(util.Pair(util.Pair(u32)))) !void {
+fn part_1(input: ArrayList(util.Vec2(util.Vec2(u32)))) !void {
     var count: u32 = 0;
     for (input.items) |item| {
-        const p1 = item.v1;
-        const p2 = item.v2;
+        const p1 = item.x;
+        const p2 = item.y;
 
-        if ((p1.v1 <= p2.v1 and p1.v2 >= p2.v2) or (p1.v1 >= p2.v1 and p1.v2 <= p2.v2)) {
+        if ((p1.x <= p2.x and p1.y >= p2.y) or (p1.x >= p2.x and p1.y <= p2.y)) {
             count += 1;
         }
     }
     try util.print_stdout("  part 1: {}\n", .{count});
 }
 
-fn part_2(input: ArrayList(util.Pair(util.Pair(u32)))) !void {
+fn part_2(input: ArrayList(util.Vec2(util.Vec2(u32)))) !void {
     var count: u32 = 0;
     for (input.items) |item| {
-        const p1 = item.v1;
-        const p2 = item.v2;
+        const p1 = item.x;
+        const p2 = item.y;
 
-        if ((p1.v1 <= p2.v1 and p1.v2 >= p2.v2) or (p1.v1 >= p2.v1 and p1.v2 <= p2.v2)) {
+        if ((p1.x <= p2.x and p1.y >= p2.y) or (p1.x >= p2.x and p1.y <= p2.y)) {
             count += 1;
-        } else if ((p1.v1 >= p2.v1 and p1.v1 <= p2.v2) or (p1.v2 >= p2.v1 and p1.v2 <= p2.v2)) {
+        } else if ((p1.x >= p2.x and p1.x <= p2.y) or (p1.y >= p2.x and p1.y <= p2.y)) {
             count += 1;
-        } else if ((p2.v1 >= p1.v1 and p2.v1 <= p1.v2) or (p2.v2 >= p1.v1 and p2.v2 <= p1.v2)) {
+        } else if ((p2.x >= p1.x and p2.x <= p1.y) or (p2.y >= p1.x and p2.y <= p1.y)) {
             count += 1;
         }
     }
     try util.print_stdout("  part 2: {}\n", .{count});
 }
 
-fn parse_input(allocator: Allocator, input: ArrayList([]u8)) !ArrayList(util.Pair(util.Pair(u32))) {
-    var pairs = ArrayList(util.Pair(util.Pair(u32))).init(allocator);
+fn parse_input(allocator: Allocator, input: ArrayList([]u8)) !ArrayList(util.Vec2(util.Vec2(u32))) {
+    var pairs = ArrayList(util.Vec2(util.Vec2(u32))).init(allocator);
     for (input.items) |item| {
         var iter = std.mem.splitAny(u8, item, "-,");
         var pair1a = try std.fmt.parseInt(u32, iter.next().?, 10);
@@ -49,17 +49,17 @@ fn parse_input(allocator: Allocator, input: ArrayList([]u8)) !ArrayList(util.Pai
         var pair2a = try std.fmt.parseInt(u32, iter.next().?, 10);
         var pair2b = try std.fmt.parseInt(u32, iter.next().?, 10);
 
-        const pair1 = util.Pair(u32){
-            .v1 = pair1a,
-            .v2 = pair1b,
+        const pair1 = util.Vec2(u32){
+            .x = pair1a,
+            .y = pair1b,
         };
-        const pair2 = util.Pair(u32){
-            .v1 = pair2a,
-            .v2 = pair2b,
+        const pair2 = util.Vec2(u32){
+            .x = pair2a,
+            .y = pair2b,
         };
-        const pair = util.Pair(util.Pair(u32)){
-            .v1 = pair1,
-            .v2 = pair2,
+        const pair = util.Vec2(util.Vec2(u32)){
+            .x = pair1,
+            .y = pair2,
         };
         try pairs.append(pair);
     }

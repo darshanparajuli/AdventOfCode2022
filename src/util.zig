@@ -29,9 +29,9 @@ pub fn read_input_of_day(allocator: Allocator, day: u32) !ArrayList([]u8) {
     return arrayList;
 }
 
-pub fn Pair(comptime T: type) type {
+pub fn Vec2(comptime T: type) type {
     return struct {
-        v1: T,
-        v2: T,
+        x: T,
+        y: T,
     };
 }
